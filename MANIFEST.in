@@ -1,0 +1,4 @@
+include LICENSE.txt
+include README.md
+include *_reference.md
+include *_tutorial.md
