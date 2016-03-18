@@ -1,4 +1,10 @@
-import mock
+import six
+
+if six.PY2:
+    import mock
+else:
+    from unittest import mock
+
 import unittest
 
 from lxml import etree
@@ -51,6 +57,26 @@ class TestModel(unittest.TestCase):
         model.name = 'some name'
 
         xml_str = str(model)
+        if six.PY2:
+            xml_str2 = model.to_xml()
+            xml_str3 = unicode(model)
+            xml_str3.should_be(xml_str2.decode('ascii'))
+        else:
+            xml_str2 = model.to_xml(encoding=str)
+
+        xml_str.should_be(xml_str2)
+
+        xml = etree.fromstring(xml_str)
+
+        name_elem = xml.find('name')
+        name_elem.shouldnt_be_none()
+        name_elem.text.should_be('some name')
+
+    def test_to_bytes(self):
+        model = SampleModel()
+        model.name = 'some name'
+
+        xml_str = bytes(model)
         xml_str2 = model.to_xml()
 
         xml_str.should_be(xml_str2)

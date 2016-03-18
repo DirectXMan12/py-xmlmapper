@@ -554,7 +554,16 @@ class Model(object):
         self._cache = cache
 
     def __str__(self):
+        if six.PY2:
+            return self.to_xml()
+        else:
+            return self.to_xml(encoding=str)
+
+    def __bytes__(self):
         return self.to_xml()
+
+    def __unicode__(self):
+        return self.to_xml(encoding=six.text_type)
 
     def to_xml(self, *args, **kwargs):
         return etree.tostring(self._etree, *args, **kwargs)
@@ -572,3 +581,6 @@ class Model(object):
         return ("<XML Mapping Model[{type}] "
                 "caching={cache}>").format(type=type(self).__name__,
                                            cache=self._cache)
+
+    def __hash__(self):
+        return hash(self._etree)
