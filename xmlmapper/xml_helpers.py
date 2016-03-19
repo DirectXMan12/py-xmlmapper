@@ -60,6 +60,14 @@ def attr_loader(attr_name, processor=six.text_type):
     return load_attr
 
 
+def load_presence(elem):
+    return elem is not None
+
+
+def dump_presence(val, elem):
+    return elem if val else None
+
+
 def str_to_bool(s):
     return s.lower() == 'true' or s == '1'
 

@@ -26,6 +26,25 @@ set its text to the value.
 dump_text
 ```
 
+Presence Loader (`Element` --> `bool`)
+--------------------------------------
+
+This method takes in an element and returns `True` if it exists
+
+```python
+load_presence
+```
+
+Presence Dumper (`bool`, `Element` --> `Element`)
+------------------------------------------------
+
+This method takes in a `bool` and an `Element` and returns the
+element if the `bool` is `True`, and otherwise returns `None`
+
+```python
+dump_presence
+```
+
 Create Text Loader (`Element` --> `str`)
 ----------------------------------------
 
