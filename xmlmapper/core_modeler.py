@@ -133,14 +133,17 @@ class CustomNodeValue(object):
             parent_node.append(elem)
             node = self._nodes[inst] = elem
         else:
-            node_parent = node.getparent()
-            ind = node_parent.index(node)
-            node_parent.remove(node)
+            new_node = self._dumps(node, value)
+            if new_node is None:
+                node_parent = node.getparent()
+                node_parent.remove(node)
+            elif new_node is not node:
+                node_parent = node.getparent()
+                ind = node_parent.index(node)
+                node_parent.remove(node)
 
-            node = self._dumps(node, value)
-
-            node_parent.insert(ind, node)
-            self._nodes[inst] = node
+                node_parent.insert(ind, node)
+                self._nodes[inst] = node
 
     def __delete__(self, inst):
         node = self._nodes.get(inst, None)
