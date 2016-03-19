@@ -128,12 +128,12 @@ class CustomNodeValue(object):
             elem = etree.Element(elem_name)
             set_elem_attrs(attrs, elem)
 
-            elem = self._dumps(elem, value)
+            elem = self._dumps(value, elem)
 
             parent_node.append(elem)
             node = self._nodes[inst] = elem
         else:
-            new_node = self._dumps(node, value)
+            new_node = self._dumps(value, node)
             if new_node is None:
                 node_parent = node.getparent()
                 node_parent.remove(node)
@@ -359,7 +359,7 @@ class NodeValueListView(object):
             elem = existing
         else:
             elem = make_elem(self._selector)
-        self._raw_dumps(elem, v)
+        self._raw_dumps(v, elem)
         return elem
 
     def _child_nodes(self, node):

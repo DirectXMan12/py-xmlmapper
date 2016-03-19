@@ -58,7 +58,7 @@ class TestCustomNodeValue(_TestDescBase, unittest.TestCase):
         self.desc.__get__(self.model).should_be(self.target_value + '-hi')
 
     def test_dumps(self):
-        def set_text(e, v):
+        def set_text(v, e):
             e.text = v[:-3]
             return e
 
@@ -211,7 +211,7 @@ class TestNodeValueListView(_TestNodeValueListViewBase, unittest.TestCase):
     def test_partial_set(self):
         self.make_present()
         self.make_item_present(self.alternate_value[1])
-        dumper = lambda e, v: e.set('like', v)
+        dumper = lambda v, e: e.set('like', v)
         other_desc = mp.ROOT.food[...].cracker % {'loads': xh.load_text,
                                                   'dumps': dumper,
                                                   'full_replace': False}

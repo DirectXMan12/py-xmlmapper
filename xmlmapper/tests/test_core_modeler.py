@@ -227,7 +227,7 @@ class TestCustomNodeValue(_TestDescBase, unittest.TestCase):
         self.desc.__get__(self.model).should_be(self.target_value + '-hi')
 
     def test_dumps(self):
-        def set_text(e, v):
+        def set_text(v, e):
             e.text = v[:-3]
             return e
 
@@ -371,7 +371,7 @@ class TestNodeValueListView(_TestNodeValueListViewBase, unittest.TestCase):
         self.alternate_value = ['ritz', 'triscuit', 'wheat thins']
         self.desc = mp.NodeValueListView('food', 'cracker',
                                          lambda e: e.get('name'),
-                                         lambda e, v: e.set('name', v))
+                                         lambda v, e: e.set('name', v))
         self.elem = etree.Element('food')
         self.item_elem_name = 'cracker'
         self.item_path = 'food/cracker'
@@ -381,7 +381,7 @@ class TestNodeValueListView(_TestNodeValueListViewBase, unittest.TestCase):
     def test_partial_set(self):
         self.make_present()
         self.make_item_present(self.alternate_value[1])
-        dumper = lambda e, v: e.set('like', v)
+        dumper = lambda v, e: e.set('like', v)
         other_desc = mp.NodeValueListView('food', 'cracker', lambda e: e.text,
                                           full_replace=False,
                                           elem_dumps=dumper)

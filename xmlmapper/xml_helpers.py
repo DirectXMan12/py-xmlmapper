@@ -6,13 +6,13 @@ def load_text(elem):
     return elem.text
 
 
-def dump_text(elem, val):
+def dump_text(val, elem):
     elem.text = six.text_type(val)
     return elem
 
 
 def text_dumper(elem_name=None, processor=six.text_type, **extra_attributes):
-    def process_and_dump_text(elem, val):
+    def process_and_dump_text(val, elem):
         elem = dump_text(elem, processor(val))
         for attr, val in extra_attributes.items():
             elem.set(attr, val)
@@ -21,7 +21,7 @@ def text_dumper(elem_name=None, processor=six.text_type, **extra_attributes):
 
     def create_and_dump_text(val):
         elem = etree.Element(elem_name)
-        return process_and_dump_text(elem, val)
+        return process_and_dump_text(val, elem)
 
     if elem_name is not None:
         return create_and_dump_text
@@ -38,7 +38,7 @@ def text_loader(processor=six.text_type):
 
 def attr_dumper(attr_name, elem_name=None,
                 processor=six.text_type, **extra_attributes):
-    def dump_attr(elem, val):
+    def dump_attr(val, elem):
         elem.set(attr_name, processor(val))
         for attr, val in extra_attributes.items():
             elem.set(attr, val)
@@ -48,7 +48,7 @@ def attr_dumper(attr_name, elem_name=None,
         return dump_attr
     else:
         def create_and_dump_attr(val):
-            return dump_attr(etree.Element(elem_name), val)
+            return dump_attr(val, etree.Element(elem_name))
 
         return create_and_dump_attr
 

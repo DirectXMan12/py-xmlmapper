@@ -16,7 +16,7 @@ This method takes in an element and returns its text content.
 load_text
 ```
 
-Text Dumper (`Element`, value --> `Element`)
+Text Dumper (value, `Element` --> `Element`)
 --------------------------------------------
 
 This method takes an element and a value and returns the element, after having
@@ -37,7 +37,7 @@ returned.
 text_loader(processor=six.text_type)
 ```
 
-Create Text Dumper (`Element`, value --> `Element` or value --> `Element`)
+Create Text Dumper (value, `Element` --> `Element` or value --> `Element`)
 --------------------------------------------------------------------------
 
 This method optionally takes the name of an element, plus any additional
@@ -57,7 +57,7 @@ text_dumper(processor=six.text_type, **extra_attributes)
 text_dumper(elem_name, processor=six.text_type, **extra_attributes)
 ```
 
-Create Attribute Dumper (`Element`, value --> `Element` or value --> `Element`)
+Create Attribute Dumper (value, `Element` --> `Element` or value --> `Element`)
 ------------------------------------------------------------------------------
 
 This method takes an attribute name, and optionally an element name,

@@ -19,7 +19,10 @@ Custom Node
 Maps directly to a particular node, making no assumptions about
 its contents.  `loads` is expected to take an element and convert
 it into a Python value, while `dumps` is expected to take an
-element an a value, and return an element.
+value and an element, and return an element.  If the element
+does not need to be replaced, simply manipulate and return the
+existing element.
+
 
 ```python
 CustomNodeValue(node_path, loads, dumps)
@@ -67,7 +70,7 @@ Node List View
 
 Maps the a subset of the chilren of a node to a list of values. `elem_loads`
 takes one of the subelements and returns a Python value.  `elem_dumps` takes
-an element and a value and returns an element.  `NodeValueListView` has an
+a value and an element and returns an element.  `NodeValueListView` has an
 `always_present` parameter which functions identically to `NodeValueList`.
 Additionally `NodeValueListView` has a parameter `full_replace`.  If
 `full_replace` is `True`, then each time an element is set, a brand new
