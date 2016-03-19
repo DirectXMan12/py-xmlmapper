@@ -187,7 +187,7 @@ class NodeValueListViewTagPathElem(DescPathElem, core.NodeValueListView):
 
     def _with_model(self, new_obj, model):
         new_obj._elem_loads = lambda e: model(e)
-        new_obj._elem_dumps = lambda e, m: m._etree
+        new_obj._elem_dumps = lambda m, e: m._etree
         new_obj._full_replace = True
 
         return new_obj

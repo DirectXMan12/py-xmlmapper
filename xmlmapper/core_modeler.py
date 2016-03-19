@@ -499,7 +499,7 @@ class NodeValueListViewInst(collections.MutableSequence):
                 self.parent._node_path))
         else:
             act_ind = self.parent._actual_index(ind, node)
-            node.insert(act_ind, self.parent._elem_dumps(value))
+            node.insert(act_ind, self.parent._elem_dumps(value, None))
 
 
 class NodeValueList(NodeValueListView):
